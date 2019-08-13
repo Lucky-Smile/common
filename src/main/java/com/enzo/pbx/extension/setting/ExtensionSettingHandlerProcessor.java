@@ -2,8 +2,6 @@ package com.enzo.pbx.extension.setting;
 
 import com.enzo.pbx.extension.setting.annotation.SettingProperties;
 import com.enzo.pbx.extension.setting.handler.AbstractExtensionSettingHandler;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
@@ -31,7 +29,7 @@ public class ExtensionSettingHandlerProcessor implements BeanFactoryPostProcesso
 			if (v instanceof AbstractExtensionSettingHandler){
 				AbstractExtensionSettingHandler handler = (AbstractExtensionSettingHandler) v;
 				SettingProperties settingProperties = handler.getClass().getAnnotation(SettingProperties.class);
-				settingHandlerMap.put(settingProperties.key(), handler);
+				settingHandlerMap.put(settingProperties.operateLevel(), handler);
 			}
 		});
 

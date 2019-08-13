@@ -15,13 +15,13 @@ public enum CallSettingKeys {
     AUDIO_LANGUAGE("audio_language"),
     CLOSE_HOUR_ACTION_MESSAGE("close_hour_action_message"),
     // support close hour voicemail greeting voice
-    CLOSE_HOUR_ACTION_VOICEMAIL("close_hour_action_voicemail"),
+    CLOSE_HOUR_ACTION_VOICEMAIL("close_hour_action_voicemail", 1),
     AREA_CODE("area_code"),
     COUNTRY("country"),
     SECURITY_QUESTION("security_question"),
-    VOICE_GREETING("voice_greeting"),
+    VOICE_GREETING("voice_greeting", 1),
     EMERGENCY_ADDRESS("emergency_address"),
-    USER_ON_HOLD_VOICE("user_on_hold_music"),
+    USER_ON_HOLD_VOICE("user_on_hold_music", 2),
     USER_DATE_FORMAT("user_date_format"),
     USER_HOUR_SYSTEM("user_time_12_24"),
     PMI("pmi"),
@@ -29,8 +29,15 @@ public enum CallSettingKeys {
 
     private String key;
 
+    private int operateLevel;
+
     CallSettingKeys(String key) {
+        this(key, 0);
+    }
+
+    CallSettingKeys(String key, int operateLevel) {
         this.key = key;
+        this.operateLevel = operateLevel;
     }
 
     public String getKey() {

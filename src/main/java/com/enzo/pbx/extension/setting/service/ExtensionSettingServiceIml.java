@@ -1,6 +1,7 @@
 package com.enzo.pbx.extension.setting.service;
 
 import com.enzo.pbx.extension.setting.ExtensionSettingHandlerContext;
+import com.enzo.pbx.extension.setting.annotation.MethodAround;
 import com.enzo.pbx.extension.setting.domain.CallSetting;
 import com.enzo.pbx.extension.setting.handler.AbstractExtensionSettingHandler;
 import org.slf4j.Logger;
@@ -22,6 +23,7 @@ public class ExtensionSettingServiceIml implements ExtensionSettingService {
 	private ExtensionSettingHandlerContext extensionSettingHandlerContext;
 
 	@Override
+	@MethodAround
 	public CallSetting getCallSetting(String accountId, String extensionId, String settingKey) {
 		logger.debug("Get extension setting, accountId: {}, extensionId: {}, settingKey: {}", accountId, extensionId, settingKey);
 		AbstractExtensionSettingHandler settingHandler = extensionSettingHandlerContext.getSettingHandler(settingKey);

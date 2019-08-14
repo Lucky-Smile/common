@@ -11,6 +11,9 @@ import java.lang.annotation.*;
 @Target({ ElementType.METHOD })
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-public @interface Observer {
-	String value();
+public @interface PbxResourceSubject {
+
+	String[] values() default {};
+
+	boolean async() default false;
 }

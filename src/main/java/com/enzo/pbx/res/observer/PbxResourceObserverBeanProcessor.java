@@ -1,6 +1,6 @@
 package com.enzo.pbx.res.observer;
 
-import com.enzo.pbx.res.observer.annotation.Observer;
+import com.enzo.pbx.res.observer.annotation.PbxResourceObserver;
 import com.enzo.pbx.res.observer.util.ReflectTool;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
@@ -15,18 +15,18 @@ import java.util.List;
  * Company: Zoom
  */
 @Service
-public class ObserverBeanProcessor implements BeanPostProcessor {
+public class PbxResourceObserverBeanProcessor implements BeanPostProcessor {
 
 	@Override
 	public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
 		Class<?> clazz = bean.getClass();
-		List<Method> methodList = ReflectTool.getObserverMethod(clazz.getDeclaredMethods(), Observer.class);
+		List<Method> methodList = ReflectTool.getObserverMethod(clazz.getDeclaredMethods(), PbxResourceObserver.class);
 
 		for (Method method : methodList) {
-			Observer observer = method.getAnnotation(Observer.class);
-			String id = observer.value();
+			PbxResourceObserver pbxResourceObserver = method.getAnnotation(PbxResourceObserver.class);
+			String id = pbxResourceObserver.value();
 
-			Subscriber.addMethod(id, method, bean);
+			PbxResourceSubscriber.addMethod(id, method, bean);
 		}
 
 		return bean;

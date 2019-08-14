@@ -1,5 +1,7 @@
 package com.enzo.pbx.res.observer;
 
+import org.springframework.util.CollectionUtils;
+
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -12,7 +14,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * Date: Created in 2019/8/13 17:00
  * Company: Zoom
  */
-public class Subscriber {
+public class PbxResourceSubscriber {
 
 	public static class MethodHolder {
 		Method method;
@@ -60,12 +62,17 @@ public class Subscriber {
 		observerMethodMap.get(id).add(new MethodHolder(method, target));
 	}
 
-	public static void notify(String id, Object param) {
-		List<MethodHolder> methodHolders = observerMethodMap.get(id);
+	public static void notify(List<String> sortedOperations, boolean isAsync, Object param) {
+		if (CollectionUtils.isEmpty(sortedOperations)){
+			return;
+		}
+		for (String operation : sortedOperations){
+			List<MethodHolder> methodHolders = observerMethodMap.get(operation);
 
-		if (null != methodHolders) {
-			for (MethodHolder methodHolder : methodHolders) {
-				methodHolder.execute(param);
+			if (null != methodHolders) {
+				for (MethodHolder methodHolder : methodHolders) {
+					methodHolder.execute(param);
+				}
 			}
 		}
 	}

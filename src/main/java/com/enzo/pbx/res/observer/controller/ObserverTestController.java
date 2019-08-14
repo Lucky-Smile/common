@@ -1,12 +1,9 @@
 package com.enzo.pbx.res.observer.controller;
 
-import com.enzo.pbx.res.observer.domain.WeatherDataModel;
-import com.enzo.pbx.res.observer.service.Weather;
+import com.enzo.pbx.res.observer.ObserverHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.ArrayList;
 
 /**
  * @author: lorenzo
@@ -18,21 +15,10 @@ import java.util.ArrayList;
 public class ObserverTestController {
 
 	@Autowired
-	private Weather weather;
+	private ObserverHelper observerHelper;
 
-	@PostMapping(value = "/weather/set")
-	public void setWeather(){
-		WeatherDataModel weatherDataModel = new WeatherDataModel();
-
-		weatherDataModel.setTemperature(22f);
-		weatherDataModel.setHumidity(0.8f);
-		weatherDataModel.setPressure(1.2f);
-
-		weatherDataModel.setForecastTemperatures(new ArrayList<>());
-		weatherDataModel.getForecastTemperatures().add(22f);
-		weatherDataModel.getForecastTemperatures().add(23f);
-		weatherDataModel.getForecastTemperatures().add(27f);
-
-		weather.measurementChanged(weatherDataModel);
+	@PostMapping(value = "/extension/update/number")
+	public void updateExtensionNumber(){
+		observerHelper.sendAllEvent("enzo", "yang", "123123");
 	}
 }

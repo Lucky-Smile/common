@@ -26,7 +26,7 @@ public class ExtensionSettingServiceIml implements ExtensionSettingService {
 	@MethodAround
 	public CallSetting getCallSetting(String accountId, String extensionId, String settingKey) {
 		logger.debug("Get extension setting, accountId: {}, extensionId: {}, settingKey: {}", accountId, extensionId, settingKey);
-		AbstractExtensionSettingHandler settingHandler = extensionSettingHandlerContext.getSettingHandler(settingKey);
+		AbstractExtensionSettingHandler settingHandler = extensionSettingHandlerContext.getSettingHandler("0");
 		return settingHandler.getCallSetting(accountId, extensionId, settingKey);
 	}
 }

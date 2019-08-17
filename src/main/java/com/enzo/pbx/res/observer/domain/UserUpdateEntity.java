@@ -7,18 +7,18 @@ package com.enzo.pbx.res.observer.domain;
  */
 public class UserUpdateEntity {
 
-	private String userId;
+	private String extensionId;
 
 	private int type;
 
 	private int status;
 
-	public String getUserId() {
-		return userId;
+	public String getExtensionId() {
+		return extensionId;
 	}
 
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setExtensionId(String extensionId) {
+		this.extensionId = extensionId;
 	}
 
 	public int getType() {
